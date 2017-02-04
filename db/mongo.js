@@ -11,7 +11,7 @@ var Url = mongoose.model('Url', urlSchema);
 
 
 
-function addUrlPairing(longUrl, shortUrl){
+function addUrlPairing(longUrl, shortUrl, cb){
   let pairing = new Url({
     long_url: longUrl,
     short_url: shortUrl
@@ -23,6 +23,7 @@ function addUrlPairing(longUrl, shortUrl){
       if (err) throw err;
       console.log('pairing saved to db url_shortener, collection urls');
       mongoose.disconnect();
+      cb();
     });
   });
 }
