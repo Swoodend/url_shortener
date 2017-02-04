@@ -11,15 +11,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:shortUrl', function(req, res){
-  mongoose.connect('mongodb://localhost/url_shortener', function(err){
+  let shortUrl = req.params.shortUrl;
+  Url.findOne({short_url: shortUrl}, function(err, doc){
     if (err) throw err;
-    let shortUrl = req.params.shortUrl;
-    Url.findOne({short_url: shortUrl}, function(err, doc){
-      if (err) throw err;
-      mongoose.disconnect();
-      res.redirect(doc.long_url);
-    });
-  })
+    mongoose.disconnect();
+    res.redirect(doc.long_url);
+  });
 });
 
 

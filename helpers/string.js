@@ -8,9 +8,7 @@ function getRandomString(){
     let randIndex = Math.floor(Math.random() * 36);
     randStr += chars[randIndex];
   }
-
   return randStr;
 }
-
 
 module.exports = getRandomString;

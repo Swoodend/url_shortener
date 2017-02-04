@@ -10,21 +10,16 @@ const urlSchema = mongoose.Schema({
 var Url = mongoose.model('Url', urlSchema);
 
 
-
 function addUrlPairing(longUrl, shortUrl, cb){
   let pairing = new Url({
     long_url: longUrl,
     short_url: shortUrl
   });
 
-  mongoose.connect('mongodb://localhost/url_shortener', function(err){
-  if (err) throw err;
-    pairing.save(function(err){
-      if (err) throw err;
-      console.log('pairing saved to db url_shortener, collection urls');
-      mongoose.disconnect();
-      cb();
-    });
+  pairing.save(function(err){
+    if (err) throw err;
+    console.log('pairing saved to db url_shortener, collection urls');
+    cb();
   });
 }
 

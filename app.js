@@ -5,6 +5,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const index = require('./routes/index');
 const url = require('./routes/url');
@@ -23,6 +24,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//connect to db
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/url_shortener');
 
 //routes
 app.use('/', index);

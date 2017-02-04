@@ -5,7 +5,6 @@ const getRandomString = require('../helpers/string.js');
 const mongo = require('../db/mongo.js');
 const Url = require('../db/mongo.js').UrlModel;
 const validUrl = require('valid-url');
-console.log(validUrl);
 
 
 router.get('/:longUrl*', function(req, res, next) {
@@ -19,8 +18,6 @@ router.get('/:longUrl*', function(req, res, next) {
   } else {
     res.send({'Error' : "Invalid URL"});
   }
-
-
 });
 
 module.exports = router;
