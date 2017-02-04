@@ -9,7 +9,7 @@ function getRandomString(){
     randStr += chars[randIndex];
   }
 
-  return randString;
+  return randStr;
 }
 
 
