@@ -1,5 +1,9 @@
-var express = require('express');
-var router = express.Router();
+'use strict';
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const Url = require('../db/mongo.js').UrlModel;
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -7,7 +11,15 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:shortUrl', function(req, res){
-  res.send(req.params.shortUrl);
+  mongoose.connect('mongodb://localhost/url_shortener', function(err){
+    if (err) throw err;
+    let shortUrl = req.params.shortUrl;
+    Url.findOne({short_url: shortUrl}, function(err, doc){
+      if (err) throw err;
+      mongoose.disconnect();
+      res.redirect(doc.long_url);
+    });
+  })
 });
 
 
