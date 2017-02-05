@@ -14,7 +14,11 @@ router.get('/:shortUrl', function(req, res){
   let shortUrl = req.params.shortUrl;
   Url.findOne({short_url: shortUrl}, function(err, doc){
     if (err) throw err;
-    res.redirect(doc.long_url);
+    try {
+      res.redirect(doc.long_url);
+    } catch(e){
+      res.send(e);
+    }
   });
 });
 
