@@ -14,7 +14,6 @@ router.get('/:shortUrl', function(req, res){
   let shortUrl = req.params.shortUrl;
   Url.findOne({short_url: shortUrl}, function(err, doc){
     if (err) throw err;
-    mongoose.disconnect();
     res.redirect(doc.long_url);
   });
 });
